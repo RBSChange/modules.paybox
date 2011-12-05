@@ -1,0 +1,7 @@
+<h3 change:h="">${trans:m.paybox.fo.paybox-title,ucf}</h3>
+<tal:block tal:content="connector/getHTMLPayment" />
+<tal:block tal:condition="order/getArchive" >
+	<br />
+	<span>${trans:m.order.frontoffice.orderlist-bill,ucf,lab}</span>
+	<a change:download="document order/getArchive">${trans:m.order.frontoffice.orderlist-bill,ucf}</a>
+</tal:block>

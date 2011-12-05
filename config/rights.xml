@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rights>
+  <actions>
+    <document name="rootfolder"/>
+  </actions>
+  <roles>
+    <role name="Admin">
+      <permission name="Enabled"/>
+    </role>
+  </roles>
+</rights>

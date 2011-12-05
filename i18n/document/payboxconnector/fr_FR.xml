@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.paybox.document.payboxconnector" lcid="fr_FR">
+  <include id="m.payment.document.connector"/>
+  <key id="document-name">Connecteur Paybox</key>
+  <key id="pbxsite">Numéro de site (TPE)</key>
+  <key id="pbxsite-help">Numéro de site (TPE) donné par la banque</key>
+  <key id="pbxrang">Numéro de rang (machine)</key>
+  <key id="pbxrang-help">Numéro de rang (machine) donné par la banque</key>
+  <key id="pbxidentifiant">Identifiant PAYBOX</key>
+  <key id="pbxidentifiant-help">Identifiant PAYBOX fourni par PAYBOX SERVICES au moment de votre inscription.</key>
+  <key id="binaryname">Binaire d'encription</key>
+  <key id="binaryname-help">Binaire d'encription dépendant de l'OS du serveur</key>
+  <key id="bankserverurl">URL du serveur Paybox</key>
+  <key id="bankserverurl-help">URL du serveur de paiement primaire de Paybox si différente de celle par défaut.</key>
+  <key id="cartes">Cartes supportées</key>
+  <key id="cartes-help">Ne rien selectionner pour toutes les cartes possibles</key>
+  <key id="all-cartes">Toutes les cartes</key>
+</i18n>

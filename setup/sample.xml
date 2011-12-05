@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/paybox/persistentdocument/import/paybox_binding.xml" />
+
+	<rootfolder module="payment">
+		<payboxconnector byLabel="Paiement Paybox System" publicationstatus="DEACTIVATED" 
+			code="CB" minValue="0.1" pbxSite="1999888" pbxRang="99" pbxIdentifiant="2" 
+			bankServerUrl="https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi"
+			binaryName="modulev3_unbuntu10_64bits.cgi" />
+	</rootfolder>
+</script>	

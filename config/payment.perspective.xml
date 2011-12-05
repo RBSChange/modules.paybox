@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<perspective>
+	<models>
+		<updatemodel name="modules_generic/rootfolder">
+			<addchild model="modules_paybox/payboxconnector" />
+			<adddrop model="modules_paybox/payboxconnector" action="move" />
+			<addcontextaction name="createAtosserverconnector" group="create_" before="" />
+		</updatemodel>
+		<updatemodel name="modules_generic/folder">
+			<addchild model="modules_paybox/payboxconnector" />
+			<adddrop model="modules_paybox/payboxconnector" action="move" />
+			<addcontextaction name="createPayboxconnector" group="create_" before="" />
+		</updatemodel>
+		<model name="modules_paybox/payboxconnector">
+			<contextactions>
+				<contextaction name="edit"/>
+				<contextaction name="delete"/>
+				<contextaction name="deactivated"/>
+				<contextaction name="reactivate"/>
+			</contextactions>
+		</model>
+	</models>
+	<actions>
+		<action name="createPayboxconnector" single="true" permission="Insert_payboxconnector" icon="add" 
+			labeli18n="m.paybox.bo.actions.createpayboxconnector"/>
+	</actions>
+</perspective>

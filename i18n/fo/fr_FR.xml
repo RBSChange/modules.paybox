@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.paybox.fo" lcid="fr_FR">
+  <key id="paybox-title">Paiement par carte bancaire</key>
+  <key id="payment-action">Payer par carte</key>
+  <key id="payment-success">Paiement par carte "{code}" effectué avec succès.</key>
+  <key id="payment-failed">Paiement échoué.</key>
+</i18n>

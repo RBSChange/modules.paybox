@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.paybox.bo.general" lcid="fr_FR">
+  <key id="module-name">paybox</key>
+  <key id="system-folder-name">paybox</key>
+  <key id="ping-error">Le serveur Paybox ne répond pas au ping.</key>
+</i18n>

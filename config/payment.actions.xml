@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action name="createPayboxconnector">
+		<parameter name="listWidget" />
+		<body><![CDATA[this.createDocumentEditor('modules_paybox_payboxconnector', listWidget.getSelectedItems()[0].id);]]></body>
+	</action>
+</actions>

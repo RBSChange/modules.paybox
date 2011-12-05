@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/paybox/persistentdocument/import/paybox_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="paybox">
+		<staticlist listid="modules_paybox/binaryname" label="Binaires">			
+			<staticitem value="modulev3_unbuntu10_64bits.cgi" label="Unbuntu 10 64bits" />
+			<staticitem value="modulev3_windows.exe" label="Windows" />
+			<staticitem value="modulev3_macos_intel.cgi" label="MacOS Intel" />
+		</staticlist>
+		
+		<staticlist listid="modules_paybox/bankserverurl" label="URL Serveur Bancaire">			
+			<staticitem value="https://tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi" label="Production" />
+			<staticitem value="https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi" label="Test" />
+		</staticlist>
+		
+		<staticlist listid="modules_paybox/cartes" label="Carte Prise en compte">			
+			<staticitem value="cb" label="CB" />
+			<staticitem value="visa" label="VISA" />
+			<staticitem value="master" label="EUROCARD_MASTERCARD" />
+			<staticitem value="ecard" label="E_CARD" />
+			<staticitem value="amex" label="AMEX" />
+			<staticitem value="diners" label="DINERS" />
+			<staticitem value="jcb" label="JCB" />
+			<staticitem value="cofinoga" label="COFINOGA" />
+			<staticitem value="sofinco" label="SOFINCO" />
+			<staticitem value="aurore" label="AURORE" />
+			<staticitem value="cdgp" label="CDGP" />
+			<staticitem value="rivegauche" label="RIVEGAUCHE" />
+		</staticlist>
+	</systemfolder>
+</script>	

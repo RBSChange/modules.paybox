@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/3.5.xsd" model-version="3.5" has-url="false" use-rewrite-url="false" icon="paybox" extend="modules_payment/connector" backoffice-indexable="true">
+  <properties>
+    <add name="code" default-value="CB"/>
+    <add name="pbxSite" type="String" db-size="7" min-occurs="1"/>
+    <add name="pbxRang" type="String" db-size="2" min-occurs="1"/>
+    <add name="pbxIdentifiant" type="String" db-size="10" min-occurs="1"/>
+    <add name="binaryName" type="String" db-size="128" min-occurs="1" from-list="modules_paybox/binaryname"/>
+    <add name="bankServerUrl" type="String" from-list="modules_paybox/bankserverurl"/>
+    <add name="cartes" type="LongString"/>
+  </properties>
+</document>
