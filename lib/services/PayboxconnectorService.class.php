@@ -307,12 +307,10 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 		$response = new payment_Transaction();
 		$response->setRawBankResponse($data);
 		
-		Framework::info(__METHOD__ . "($returnType, $data)");
 		if (!preg_match('/^billId=([0-9]+)&/', $data, $billInfo))
 		{
 			throw new Exception("Invalid bill identification");
 		}
-		Framework::info(__METHOD__ . var_export($billInfo, true));
 		
 		$order = DocumentHelper::getDocumentInstance($billInfo[1]);
 		if (!($order instanceof payment_Order))
@@ -349,8 +347,7 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 		
 		$dataArray = array();
 		parse_str($data, $dataArray);
-		Framework::info(__METHOD__ . var_export($dataArray, true));
-		
+
 		$amount = $this->buildPBXTotal($connector, $order);
 		if ($amount !== $dataArray['amount'])
 		{
@@ -376,7 +373,6 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 			$response->setTransactionText(LocaleService::getInstance()->transFO('m.paybox.fo.payment-failed', array('ucf')));			
 		}
 	
-		Framework::info(__METHOD__ . var_export($response, true));
 		return $response;
 	}
 
@@ -499,12 +495,12 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 	 */
 	private function getSignedData($qrystr, $url) 
 	{
-		$pos = strrpos($qrystr, '&');                         // cherche dernier separateur
-		$data = substr($qrystr, 0, $pos);                     // et voila les donnees signees
-		$pos= strpos($qrystr, '=', $pos) + 1;                 // cherche debut valeur signature
-		$sig = substr($qrystr, $pos);                         // et voila la signature
-		if($url) $sig = urldecode($sig);                    // decodage signature url
-		$sig = base64_decode($sig);                           // decodage signature base 64
+		$pos = strrpos($qrystr, '&');
+		$data = substr($qrystr, 0, $pos);
+		$pos= strpos($qrystr, '=', $pos) + 1;
+		$sig = substr($qrystr, $pos);
+		if($url) $sig = urldecode($sig);
+		$sig = base64_decode($sig);
 		return array($data, $sig);
 	}	
 	
@@ -513,6 +509,7 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 	 * @param string $qrystr
 	 * @param string $keyfile
 	 * @param boolean $url
+	 * @return integer 1 si valide, 0 si invalide, -1 si erreur
 	 */
 	private function pbxVerSign($qrystr, $keyfile, $url) 
 	{ 
@@ -521,319 +518,5 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 		
 		list($data, $sig) = $this->getSignedData($qrystr, $url);
 		return openssl_verify($data, $sig, $key); // verification : 1 si valide, 0 si invalide, -1 si erreur
-	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document (optionnal => can be null !).
-	 * @return void
-	 */
-//	protected function preSave($document, $parentNodeId)
-//	{
-//		parent::preSave($document, $parentNodeId);
-//
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-//	protected function preInsert($document, $parentNodeId)
-//	{
-//		parent::preInsert($document, $parentNodeId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-//	protected function postInsert($document, $parentNodeId)
-//	{
-//		parent::postInsert($document, $parentNodeId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-//	protected function preUpdate($document, $parentNodeId)
-//	{
-//		parent::preUpdate($document, $parentNodeId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-//	protected function postUpdate($document, $parentNodeId)
-//	{
-//		parent::postUpdate($document, $parentNodeId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
-//	protected function postSave($document, $parentNodeId)
-//	{
-//		parent::postSave($document, $parentNodeId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return void
-	 */
-//	protected function preDelete($document)
-//	{
-//		parent::preDelete($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return void
-	 */
-//	protected function preDeleteLocalized($document)
-//	{
-//		parent::preDeleteLocalized($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return void
-	 */
-//	protected function postDelete($document)
-//	{
-//		parent::postDelete($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return void
-	 */
-//	protected function postDeleteLocalized($document)
-//	{
-//		parent::postDeleteLocalized($document);
-//	}
-
-
-
-
-	/**
-	 * Methode à surcharger pour effectuer des post traitement apres le changement de status du document
-	 * utiliser $document->getPublicationstatus() pour retrouver le nouveau status du document.
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param String $oldPublicationStatus
-	 * @param array<"cause" => String, "modifiedPropertyNames" => array, "oldPropertyValues" => array> $params
-	 * @return void
-	 */
-//	protected function publicationStatusChanged($document, $oldPublicationStatus, $params)
-//	{
-//		parent::publicationStatusChanged($document, $oldPublicationStatus, $params);
-//	}
-
-	/**
-	 * Correction document is available via $args['correction'].
-	 * @param f_persistentdocument_PersistentDocument $document
-	 * @param Array<String=>mixed> $args
-	 */
-//	protected function onCorrectionActivated($document, $args)
-//	{
-//		parent::onCorrectionActivated($document, $args);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param String $tag
-	 * @return void
-	 */
-//	public function tagAdded($document, $tag)
-//	{
-//		parent::tagAdded($document, $tag);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param String $tag
-	 * @return void
-	 */
-//	public function tagRemoved($document, $tag)
-//	{
-//		parent::tagRemoved($document, $tag);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $fromDocument
-	 * @param f_persistentdocument_PersistentDocument $toDocument
-	 * @param String $tag
-	 * @return void
-	 */
-//	public function tagMovedFrom($fromDocument, $toDocument, $tag)
-//	{
-//		parent::tagMovedFrom($fromDocument, $toDocument, $tag);
-//	}
-
-	/**
-	 * @param f_persistentdocument_PersistentDocument $fromDocument
-	 * @param paybox_persistentdocument_payboxconnector $toDocument
-	 * @param String $tag
-	 * @return void
-	 */
-//	public function tagMovedTo($fromDocument, $toDocument, $tag)
-//	{
-//		parent::tagMovedTo($fromDocument, $toDocument, $tag);
-//	}
-
-	/**
-	 * Called before the moveToOperation starts. The method is executed INSIDE a
-	 * transaction.
-	 *
-	 * @param f_persistentdocument_PersistentDocument $document
-	 * @param Integer $destId
-	 */
-//	protected function onMoveToStart($document, $destId)
-//	{
-//		parent::onMoveToStart($document, $destId);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param Integer $destId
-	 * @return void
-	 */
-//	protected function onDocumentMoved($document, $destId)
-//	{
-//		parent::onDocumentMoved($document, $destId);
-//	}
-
-	/**
-	 * this method is call before saving the duplicate document.
-	 * If this method not override in the document service, the document isn't duplicable.
-	 * An IllegalOperationException is so launched.
-	 *
-	 * @param paybox_persistentdocument_payboxconnector $newDocument
-	 * @param paybox_persistentdocument_payboxconnector $originalDocument
-	 * @param Integer $parentNodeId
-	 *
-	 * @throws IllegalOperationException
-	 */
-//	protected function preDuplicate($newDocument, $originalDocument, $parentNodeId)
-//	{
-//		throw new IllegalOperationException('This document cannot be duplicated.');
-//	}
-
-	/**
-	 * this method is call after saving the duplicate document.
-	 * $newDocument has an id affected.
-	 * Traitment of the children of $originalDocument.
-	 *
-	 * @param paybox_persistentdocument_payboxconnector $newDocument
-	 * @param paybox_persistentdocument_payboxconnector $originalDocument
-	 * @param Integer $parentNodeId
-	 *
-	 * @throws IllegalOperationException
-	 */
-//	protected function postDuplicate($newDocument, $originalDocument, $parentNodeId)
-//	{
-//	}
-
-	/**
-	 * @param website_UrlRewritingService $urlRewritingService
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param website_persistentdocument_website $website
-	 * @param string $lang
-	 * @param array $parameters
-	 * @return f_web_Link | null
-	 */
-//	public function getWebLink($urlRewritingService, $document, $website, $lang, $parameters)
-//	{
-//		return null;
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return integer | null
-	 */
-//	public function getWebsiteId($document)
-//	{
-//		return parent::getWebsiteId($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return integer[] | null
-	 */
-//	public function getWebsiteIds($document)
-//	{
-//		return parent::getWebsiteIds($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @return website_persistentdocument_page | null
-	 */
-//	public function getDisplayPage($document)
-//	{
-//		return parent::getDisplayPage($document);
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param string $forModuleName
-	 * @param array $allowedSections
-	 * @return array
-	 */
-//	public function getResume($document, $forModuleName, $allowedSections = null)
-//	{
-//		$resume = parent::getResume($document, $forModuleName, $allowedSections);
-//		return $resume;
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param string $bockName
-	 * @return array with entries 'module' and 'template'. 
-	 */
-//	public function getSolrsearchResultItemTemplate($document, $bockName)
-//	{
-//		return array('module' => 'paybox', 'template' => 'Paybox-Inc-PayboxconnectorResultDetail');
-//	}
-
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */
-//	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
-//	{
-//	}
-	
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $document
-	 * @param String[] $propertiesName
-	 * @param Array $datas
-	 */
-//	public function addFormProperties($document, $propertiesName, &$datas)
-//	{
-//	}
-		
+	}		
 }
