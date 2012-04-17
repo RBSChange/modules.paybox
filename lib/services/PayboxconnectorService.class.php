@@ -67,8 +67,6 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 		return $result;
 	}
 	
-	
-	
 	/**
 	 * @param paybox_persistentdocument_payboxconnector $document
 	 * @return string or false
@@ -119,19 +117,6 @@ class paybox_PayboxconnectorService extends payment_ConnectorService
 				'PBX_REPONDRE_A' => LinkHelper::getActionUrl('paybox', 'BankListener') . $billQueryString);
 		$urls['PBX_PAYBOX'] = $this->ping($connector);
 		return $urls;
-	}
-	
-	/**
-	 * @param paybox_persistentdocument_payboxconnector $connector
-	 * @param payment_Order $order
-	 */
-	private function setPaymentStatus($connector, $order)
-	{
-		$ls = LocaleService::getInstance();
-		$html = '<ol class="messages"><li>' . $ls->transFO('m.order.frontoffice.orderlist-status', array('ucf', 'html')) . ' : ' .
-				$ls->transFO('m.payment.frontoffice.status.'. strtolower($order->getPaymentStatus()), array('ucf', 'html')) . '</li>'.
-				'<li>' . f_util_HtmlUtils::nlTobr($order->getPaymentTransactionText()) .'</li></ol>';	
-		$connector->setHTMLPayment($html);
 	}
 	
 	/**
